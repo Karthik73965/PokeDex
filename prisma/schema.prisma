@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Pokemon {
+  id             String   @id @default(uuid()) @map("_id")
+  name           String   @unique
+  types          String[]
+  abilities      String[]
+  hp             Int
+  attack         Int
+  defense        Int
+  specialAttack  Int
+  specialDefense Int
+  speed          Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

@@ -1,0 +1,22 @@
+export const pokemonNames = [
+    "squirtle",
+    "lapras",
+    "vaporeon",
+    "psyduck",
+    "totodile",
+    "pikachu",
+    "jolteon",
+    "magneton",
+    "luxray",
+    "raichu",
+    "charmander",
+    "arcanine",
+    "cyndaquil",
+    "infernape",
+    "magmortar",
+    "onix",
+    "geodude",
+    "rhyhorn",
+    "tyranitar",
+    "steelix"
+];
