@@ -16,7 +16,9 @@ export async function CreatePokemon(list: string[]) {
         );
         const pokemonData: PokemonData = response.data;
 
-        const { name, types, abilities, stats } = pokemonData;
+        const { name, types, abilities, stats , sprites  } = pokemonData;
+        const imageUrl = sprites.other ? sprites.other['official-artwork'].front_default : sprites.front_default;
+
 
         const formattedData: FormattedPokemonData = {
             name,
@@ -26,6 +28,7 @@ export async function CreatePokemon(list: string[]) {
                 acc[stat.stat.name] = stat.base_stat;
                 return acc
             }, {} as Record<string, number>),
+            imageUrl
         };
         console.log(formattedData)
         await prisma.pokemon.create({
@@ -39,6 +42,7 @@ export async function CreatePokemon(list: string[]) {
                 specialAttack: formattedData.baseStats['special-attack'],
                 specialDefense: formattedData.baseStats['special-defense'],
                 speed: formattedData.baseStats.speed,
+                imageUrl: formattedData.imageUrl, // Store image URL in the database
             }
         })
     }

@@ -12,6 +12,7 @@ model Pokemon {
   name           String   @unique
   types          String[]
   abilities      String[]
+  imageUrl       String
   hp             Int
   attack         Int
   defense        Int
@@ -21,3 +22,38 @@ model Pokemon {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model User {
+  id        String   @id @default(uuid()) @map("_id")
+  name      String
+  email     String   @unique
+  password  String
+  wins      Int      @default(0)
+  lost      Int      @default(0)
+  played    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// model game {
+//   id            String      @id @default(uuid()) @map("_id")
+//   player1       String
+//   Player2       String
+//   result        GAME_STATUS
+//   wonby         String
+//   lostby        String
+//   Playeer1Turn1 String
+//   Playeer1Turn2 String
+//   Playeer1Turn3 String
+//   Playeer2Turn1 String
+//   Playeer2Turn2 String
+//   Playeer2Turn3 String
+//   createdAt     DateTime    @default(now())
+//   updatedAt     DateTime    @updatedAt
+// }
+
+// enum GAME_STATUS {
+//   STARTED
+//   ENDED
+//   GOINGON
+// }
