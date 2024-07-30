@@ -1,4 +1,4 @@
-
+'use server'
 import prisma from "@/lib/prisma";
 import { FormattedPokemonData, PokemonData } from "@/types/PokeTypes";
 import { pokemonNames } from "@/utils/Pokemons";
@@ -16,7 +16,7 @@ export async function CreatePokemon(list: string[]) {
         );
         const pokemonData: PokemonData = response.data;
 
-        const { name, types, abilities, stats , sprites  } = pokemonData;
+        const { name, types, abilities, stats, sprites } = pokemonData;
         const imageUrl = sprites.other ? sprites.other['official-artwork'].front_default : sprites.front_default;
 
 
@@ -47,4 +47,14 @@ export async function CreatePokemon(list: string[]) {
         })
     }
     return "done"
+}
+
+export const getAllPokemons = async () => {
+    try {
+        const Pokemons = await prisma.pokemon.findMany()
+        return Pokemons
+    } catch (error) {
+        console.log(error)
+        return null
+    }
 }
