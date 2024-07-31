@@ -35,25 +35,30 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-// model game {
-//   id            String      @id @default(uuid()) @map("_id")
-//   player1       String
-//   Player2       String
-//   result        GAME_STATUS
-//   wonby         String
-//   lostby        String
-//   Playeer1Turn1 String
-//   Playeer1Turn2 String
-//   Playeer1Turn3 String
-//   Playeer2Turn1 String
-//   Playeer2Turn2 String
-//   Playeer2Turn3 String
-//   createdAt     DateTime    @default(now())
-//   updatedAt     DateTime    @updatedAt
-// }
+model game {
+  id            String      @id @default(uuid()) @map("_id")
+  player1       String
+  Player2       String
+  result        GAME_STATUS
+  wonby         String
+  lostby        String
+  Playeer1Turn1 Json?
+  Playeer1Turn2 Json?
+  Playeer1Turn3 Json?
+  Playeer2Turn1 Json?
+  Playeer2Turn2 Json?
+  Playeer2Turn3 Json?
+  Player1Cards  Json?
+  Player2Cards  Json?
+  turn1         Json?
+  turn2         Json?
+  turn3         Json?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
 
-// enum GAME_STATUS {
-//   STARTED
-//   ENDED
-//   GOINGON
-// }
+enum GAME_STATUS {
+  STARTED
+  ENDED
+  GOINGON
+}

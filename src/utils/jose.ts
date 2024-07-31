@@ -35,11 +35,15 @@ export async function getIdAcessToken(token: string): Promise<string | null> {
 export async function getUserInfo() {
     try {
         const token = cookies().get("token")?.value || ""
+       if(token){
         const { payload } = await jwtVerify(token, secretKey, {
             algorithms: ["HS256"],
         });
         //@ts-ignore
         return payload;
+       }else{
+        return null
+       }
     } catch (error) {
         console.log(error)
         return null
