@@ -12,28 +12,28 @@ export const InitiateGame = async (playerId: string) => {
             for (let i = 0; i < 10; i++) { 
                 const queueLength = await Redis.lLen('playerQueue')
                 if (queueLength >= 2) {
-                    const player1 = await Redis.rPop('playerQueue') || ""
-                    const player2 = await Redis.rPop('playerQueue') || ""
+                    const Player1 = await Redis.rPop('playerQueue') || ""
+                    const Player2 = await Redis.rPop('playerQueue') || ""
 
                     // Create a new game in the database
                     const newGame = await prisma.game.create({
                         data: {
-                            player1,
-                            Player2: player2,
+                            Player1,
+                            Player2,
                             result: 'STARTED',
                             wonby: '',
                             lostby: '',
-                            Playeer1Turn1: {},
-                            Playeer1Turn2: {},
-                            Playeer1Turn3: {},
-                            Playeer2Turn1: {},
-                            Playeer2Turn2: {},
-                            Playeer2Turn3: {},
+                            Player1Turn1: {},
+                            Player1Turn2: {},
+                            Player1Turn3: {},
+                            Player2Turn1: {},
+                            Player2Turn2: {},
+                            Player2Turn3: {},
                         }
                     })
 
                     // Publish game start event
-                    const gameStartMessage = JSON.stringify({ gameId: newGame.id, player1, player2 })
+                    const gameStartMessage = JSON.stringify({ gameId: newGame.id, Player1, Player2 })
                     await Redis.publish('gameStarted', gameStartMessage)
                     return { message: 'Game started', gameId: newGame.id }
                 }
@@ -72,7 +72,7 @@ export const getRandomPokemonAndUpdateGame = async (userId:string, gameId:string
         })
 
         if (game) {
-            const updateData = userId === game.player1 ? {
+            const updateData = userId === game.Player1 ? {
                 Player1Cards: randomPokemon
             } : {
                 Player2Cards: randomPokemon

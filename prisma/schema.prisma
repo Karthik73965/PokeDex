@@ -37,17 +37,17 @@ model User {
 
 model game {
   id            String      @id @default(uuid()) @map("_id")
-  player1       String
+  Player1       String
   Player2       String
   result        GAME_STATUS
   wonby         String
   lostby        String
-  Playeer1Turn1 Json?
-  Playeer1Turn2 Json?
-  Playeer1Turn3 Json?
-  Playeer2Turn1 Json?
-  Playeer2Turn2 Json?
-  Playeer2Turn3 Json?
+  Player1Turn1 Json?
+  Player1Turn2 Json?
+  Player1Turn3 Json?
+  Player2Turn1 Json?
+  Player2Turn2 Json?
+  Player2Turn3 Json?
   Player1Cards  Json?
   Player2Cards  Json?
   turn1         Json?
