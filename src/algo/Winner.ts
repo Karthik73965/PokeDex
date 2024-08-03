@@ -1,17 +1,17 @@
 'use server'
 import { Pokemon } from "@prisma/client";
 
-export const determineTurnWinner = (player1Pokemon:any, player2Pokemon: any) => {
+export const determineTurnWinner = async (playerPokemon:Pokemon, ComputerPokemon: Pokemon) => {
     // Basic comparison based on Pokémon stats
-    const player1Score = player1Pokemon.attack + player1Pokemon.defense + player1Pokemon.hp;
-    const player2Score = player2Pokemon.attack + player2Pokemon.defense + player2Pokemon.hp;
+    const player1Score = playerPokemon.attack + playerPokemon.defense + playerPokemon.hp;
+    const player2Score = ComputerPokemon.attack + ComputerPokemon.defense + ComputerPokemon.hp;
 
     if (player1Score > player2Score) {
-        return { winner: 'player1', player1Pokemon, player2Pokemon };
+        return { winner: 'player', playerPokemon, ComputerPokemon };
     } else if (player2Score > player1Score) {
-        return { winner: 'player2', player1Pokemon, player2Pokemon };
+        return { winner: 'computer', playerPokemon, ComputerPokemon };
     } else {
-        return { winner: 'draw', player1Pokemon, player2Pokemon };
+        return { winner: 'draw', playerPokemon, ComputerPokemon };
     }
 };
 

@@ -1,12 +1,14 @@
 "use client"
 import { loginUser } from '@/actions/AuthActions';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignupForm() {
 
   const [email, setemail] = useState<string>("")
   const [password, setpassword] = useState<string>("")
   const [load, setload] = useState(false)
+  const router = useRouter()
 
 
 
@@ -15,8 +17,12 @@ export default function SignupForm() {
 
     try {
       const response = await loginUser(email, password)
-      alert(response.message)
-    } catch (error) {
+      if (response.status == 201) {
+        window.location.reload()
+      } else {
+        alert(response.message)
+      }
+    } catch (error) { 
       console.error(error);
       alert(error)
     }

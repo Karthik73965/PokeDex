@@ -24,41 +24,51 @@ model Pokemon {
 }
 
 model User {
-  id        String   @id @default(uuid()) @map("_id")
-  name      String
-  email     String   @unique
-  password  String
-  wins      Int      @default(0)
-  lost      Int      @default(0)
-  played    Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String        @id @default(uuid()) @map("_id")
+  name        String
+  email       String        @unique
+  password    String
+  rating      Int           @default(100)
+  flucuations Flucuations[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 model game {
-  id            String      @id @default(uuid()) @map("_id")
-  Player1       String
-  Player2       String
-  result        GAME_STATUS
-  wonby         String
-  lostby        String
-  Player1Turn1 Json?
-  Player1Turn2 Json?
-  Player1Turn3 Json?
-  Player2Turn1 Json?
-  Player2Turn2 Json?
-  Player2Turn3 Json?
-  Player1Cards  Json?
-  Player2Cards  Json?
-  turn1         Json?
-  turn2         Json?
-  turn3         Json?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  id             String      @id @default(uuid()) @map("_id")
+  Player1        String
+  result         GAME_STATUS
+  wonby          String?
+  lostby         String?
+  Player1Turn1   Json?
+  Player1Turn2   Json?
+  Player1Turn3   Json?
+  ComputerTurn1  Json?
+  ComputerTurn2  Json?
+  ComputerTurn3  Json?
+  Player1Cards   Json?
+  ComputerCards  Json?
+  PlayerPoints   Int?
+  ComputerPoints Int?
+  turn1          Json?
+  turn2          Json?
+  turn3          Json?
+  rating         Int?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model Flucuations {
+  id          String   @id @default(uuid()) @map("_id")
+  user        User?    @relation(fields: [userId], references: [id])
+  userId      String
+  gameid      String
+  transaction Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum GAME_STATUS {
   STARTED
   ENDED
-  GOINGON
 }

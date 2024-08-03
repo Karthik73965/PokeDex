@@ -23,7 +23,17 @@ export const signupUser = async (name: string, email: string, password: string) 
                 password: hashedPassword,
             },
         });
-
+        const createFlucuation = await prisma.flucuations.create({
+            data: {
+                userId:user.id ,
+                gameid: "Create",
+                transaction: {
+                    realised: +100,
+                    rating: 100,
+                }
+            }
+        })
+        console.log(createFlucuation)
         const token = await generateAccessToken(user.id, user.name, user.email);
 
         cookies().set("token", token, {
